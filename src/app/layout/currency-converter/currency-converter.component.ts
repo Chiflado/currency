@@ -31,7 +31,6 @@ export class CurrencyConverterComponent {
   }
 
   getCurrencies(): void {
-    this.showTable = false;
     this.amount = this.amountControl.value;
     this.currency = this.currencyControl.value;
     if (this.amount && this.currency) {
