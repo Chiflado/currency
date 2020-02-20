@@ -9,6 +9,7 @@ import { CurrencyConverterComponent } from './layout/currency-converter/currency
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './shared/material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { OnlyNumberDirective } from './shared/only-number.directive';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     LayoutComponent,
     TopNavbarComponent,
     SidebarComponent,
-    CurrencyConverterComponent
+    CurrencyConverterComponent,
+    OnlyNumberDirective
   ],
   imports: [
     BrowserModule,

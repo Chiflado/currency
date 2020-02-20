@@ -8,7 +8,7 @@
             <form id="amount-form">
                 <mat-form-field id="amount-input">
                     <mat-label>Amount</mat-label>
-                    <input matInput type="text" [formControl]="amountControl" min="0">
+                    <input matInput type="text" OnlyNumber="true"  [formControl]="amountControl" min="0">
                 </mat-form-field>
                 <mat-form-field id="currency-input">
                   <mat-label>Currency from</mat-label>
