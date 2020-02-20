@@ -23,8 +23,8 @@
             <div id="button-container">
                 <button mat-raised-button
                     color="primary"
-                    [disabled]="!amountControl.value || !currencyControl.value || !isFieldsChanged()"
-                    (click)="getCurrencies()">
+                    [disabled]="!amountControl.value || !currencyControl.value || !converted"
+                    (click)="addExchangedToTable()">
                     CONVERT
                 </button>
             </div>
