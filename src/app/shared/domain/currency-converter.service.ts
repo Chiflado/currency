@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { GetCurrenciesResponse } from '../data';
 
 @Injectable({
   providedIn: 'root'
@@ -17,10 +18,4 @@ export class CurrencyConverterService {
       return resp;
     }));
   }
-}
-
-interface GetCurrenciesResponse {
-  base: string;
-  date: string;
-  rates: any;
 }
