@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-currency-converter',
@@ -7,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CurrencyConverterComponent implements OnInit {
 
-  constructor() { }
+  amountControl = new FormControl('');
+  currencyControl = new FormControl('');
+
+  constructor() {}
 
   ngOnInit() {
   }

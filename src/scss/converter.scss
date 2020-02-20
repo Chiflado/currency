@@ -1,0 +1,18 @@
+#amount-form {
+    display: flex;
+    width: 65%;
+    justify-content: space-between;
+
+    #amount-input {
+        width: 65%;
+    }
+
+    #currency-input {
+        width: 20%;
+    }
+
+    #to-currency {
+        display: flex;
+        align-items: center;
+    }
+}

@@ -2,4 +2,24 @@
     <mat-card-header>
         <mat-card-title>Currency converter</mat-card-title>
     </mat-card-header>
+
+    <div id="converter-container">
+        <div>
+            <form id="amount-form">
+                <mat-form-field id="amount-input">
+                    <mat-label>Amount</mat-label>
+                    <input matInput type="text" [formControl]="amountControl" min="0">
+                </mat-form-field>
+                <mat-form-field id="currency-input">
+                  <mat-label>Currency from</mat-label>
+                  <mat-select [formControl]="currencyControl">
+                    <mat-option value="EUR">EUR</mat-option>
+                    <mat-option value="HUF">HUF</mat-option>
+                    <mat-option value="CZK">CZK</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <span id="to-currency">To USD</span>
+            </form>
+        </div>
+    </div>
 </mat-card>
