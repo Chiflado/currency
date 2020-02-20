@@ -18,14 +18,14 @@ export class CurrencyConverterComponent {
   constructor(private service: CurrencyConverterService) {
   }
 
-  getCurrencies() {
+  getCurrencies(): void {
     this.converted = null;
     this.amount = this.amountControl.value;
     this.currency = this.currencyControl.value;
     this.service.getExchangeRates(this.currency).subscribe(resp => this.convertAmount(resp.rates.USD));
   }
 
-  convertAmount(exchRate) {
+  convertAmount(exchRate): void {
     if (this.amount.includes(',')) {
       const colonInd = this.amount.indexOf(',');
       this.amount = this.setCharAt(this.amount, colonInd, '.');
@@ -33,7 +33,7 @@ export class CurrencyConverterComponent {
     this.converted = Number(this.amount) * exchRate;
   }
 
-  setCharAt(str, index, chr) {
+  setCharAt(str: string, index: number, chr: string): string {
     return str.substr(0, index) + chr + str.substr(index + 1);
   }
 
