@@ -6,6 +6,10 @@
     width: 65%;
 }
 
+#currency-card {
+    overflow: auto;
+}
+
 #amount-form {
     display: flex;
     justify-content: space-between;

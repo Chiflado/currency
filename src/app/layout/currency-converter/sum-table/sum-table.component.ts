@@ -9,10 +9,14 @@ export class SumTableComponent implements OnInit {
 
   @Input() tableData: SumTableData[];
 
-  constructor() { }
+  displayedColumns: string[] = ['amount', 'currency', 'converted'];
 
   ngOnInit() {
     console.log(this.tableData);
+  }
+
+  getTotalCost() {
+    return this.tableData.map(t => t.converted).reduce((acc, value) => acc + value, 0);
   }
 
 }

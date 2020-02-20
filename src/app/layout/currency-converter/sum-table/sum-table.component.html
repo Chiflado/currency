@@ -1,1 +1,29 @@
-<p>sum-table works!</p>
+<mat-table [dataSource]="tableData" class="mat-elevation-z8">
+    <ng-container matColumnDef="amount">
+      <mat-header-cell *matHeaderCellDef> Amount </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.amount}} </mat-cell>
+      <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+    </ng-container>
+  
+    <ng-container matColumnDef="currency">
+      <mat-header-cell *matHeaderCellDef> Currency </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.currency}} </mat-cell>
+      <mat-footer-cell *matFooterCellDef>
+        <strong>Total: </strong>
+      </mat-footer-cell>
+    </ng-container>
+  
+    <ng-container matColumnDef="converted">
+      <mat-header-cell *matHeaderCellDef> Exchanged value (USD) </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.converted}} </mat-cell>
+      <mat-footer-cell *matFooterCellDef>
+        <strong>
+          {{getTotalCost()}}  
+        </strong>
+      </mat-footer-cell>
+    </ng-container>
+  
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <mat-footer-row *matFooterRowDef="displayedColumns"></mat-footer-row>
+  </mat-table>
