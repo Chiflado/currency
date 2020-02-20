@@ -9,7 +9,7 @@ import { GetCurrenciesResponse } from '../data';
 })
 export class CurrencyConverterService {
 
-  private BASE_URL = 'https://api.exchangeratesapi.io/latest';
+  private readonly BASE_URL = 'https://api.exchangeratesapi.io/latest';
 
   constructor(private http: HttpClient) { }
 
