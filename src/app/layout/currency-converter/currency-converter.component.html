@@ -21,14 +21,17 @@
                 <span id="to-currency">To USD</span>
             </form>
             <div id="button-container">
-                <button mat-raised-button color="primary">
+                <button mat-raised-button
+                    color="primary"
+                    [disabled]="!amountControl.value || !currencyControl.value"
+                    (click)="getCurrencies()">
                     CONVERT
                 </button>
             </div>
         </div>
         <div id="converted-container" *ngIf="converted">
             <div id="amount">
-                {{amount}} EUR =
+                {{amount}} {{currency}} =
             </div>
             <div id="converted-value">
                 {{converted}} USD
