@@ -1,26 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { CurrencyConverterService } from 'src/app/shared/domain/currency-converter.service';
-import { ECANCELED } from 'constants';
 
 @Component({
   selector: 'app-currency-converter',
-  templateUrl: './currency-converter.component.html',
-  styleUrls: ['./currency-converter.component.scss']
+  templateUrl: './currency-converter.component.html'
 })
-export class CurrencyConverterComponent implements OnInit {
+export class CurrencyConverterComponent {
 
   converted: number;
-  amount;
+  amount: string;
   currency: string;
 
   amountControl = new FormControl('');
   currencyControl = new FormControl('');
 
   constructor(private service: CurrencyConverterService) {
-  }
-
-  ngOnInit() {
   }
 
   getCurrencies() {

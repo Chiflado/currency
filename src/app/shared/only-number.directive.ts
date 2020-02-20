@@ -1,13 +1,11 @@
 
-import { Directive, ElementRef, HostListener, Input } from '@angular/core';
+import { Directive, HostListener, Input } from '@angular/core';
 
 @Directive({
   // tslint:disable-next-line:directive-selector
   selector: '[OnlyNumber]'
 })
 export class OnlyNumberDirective {
-
-  constructor(private el: ElementRef) { }
 
   @Input() OnlyNumber: boolean;
 
