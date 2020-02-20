@@ -16,7 +16,12 @@ export class SumTableComponent implements OnInit {
   }
 
   getTotalCost() {
-    return this.tableData.map(t => t.converted).reduce((acc, value) => acc + value, 0);
+    const total = this.tableData.map(t => t.converted).reduce((acc, value) => acc + value, 0);
+    return this.roundConverted(total);
+  }
+
+  roundConverted(value) {
+    return Math.round((value + Number.EPSILON) * 100) / 100;
   }
 
 }

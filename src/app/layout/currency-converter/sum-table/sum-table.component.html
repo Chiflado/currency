@@ -15,7 +15,7 @@
   
     <ng-container matColumnDef="converted">
       <mat-header-cell *matHeaderCellDef> Exchanged value (USD) </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.converted}} </mat-cell>
+      <mat-cell *matCellDef="let element"> {{roundConverted(element.converted)}} </mat-cell>
       <mat-footer-cell *matFooterCellDef>
         <strong>
           {{getTotalCost()}}  
