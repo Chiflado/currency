@@ -11,6 +11,7 @@ import { MaterialModule } from './shared/material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { OnlyNumberDirective } from './shared/only-number.directive';
 import { HttpClientModule } from '@angular/common/http';
+import { SumTableComponent } from './layout/currency-converter/sum-table/sum-table.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { HttpClientModule } from '@angular/common/http';
     TopNavbarComponent,
     SidebarComponent,
     CurrencyConverterComponent,
-    OnlyNumberDirective
+    OnlyNumberDirective,
+    SumTableComponent
   ],
   imports: [
     BrowserModule,
