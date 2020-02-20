@@ -16,11 +16,13 @@ export class CurrencyConverterComponent {
 
   amountControl = new FormControl('');
   currencyControl = new FormControl('');
+  showTable = false;
 
   constructor(private service: CurrencyConverterService) {
   }
 
   getCurrencies(): void {
+    this.showTable = false;
     this.converted = null;
     this.amount = this.amountControl.value;
     this.currency = this.currencyControl.value;
@@ -43,10 +45,21 @@ export class CurrencyConverterComponent {
       currency: this.currency
     };
     this.exchangedHistory.push(element);
+    this.showTable = true;
   }
 
   setCharAt(str: string, index: number, chr: string): string {
     return str.substr(0, index) + chr + str.substr(index + 1);
+  }
+
+  isFieldsChanged() {
+    if (this.amount !== this.amountControl.value) {
+      return true;
+    }
+    if (this.currency !== this.currencyControl.value) {
+      return true;
+    }
+    return false;
   }
 
 }
