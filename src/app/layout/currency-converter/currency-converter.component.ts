@@ -1,16 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { CurrencyConverterService } from 'src/app/shared/domain/currency-converter.service';
 import { SumTableData } from 'src/app/shared/data';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { MatDialog } from '@angular/material';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-currency-converter',
   templateUrl: './currency-converter.component.html'
 })
-export class CurrencyConverterComponent {
+export class CurrencyConverterComponent implements OnDestroy {
 
   converted: number;
   amount: string;
@@ -22,30 +23,38 @@ export class CurrencyConverterComponent {
   showTable = false;
   isButtonDisabled = true;
 
-  constructor(private service: CurrencyConverterService, public dialog: MatDialog) {
-    this.amountControl.valueChanges.subscribe(() => this.isButtonDisabled = true);
+  subscriptions: Subscription = new Subscription();
+
+  constructor(private service: CurrencyConverterService, private dialog: MatDialog) {
+    const amountCtrlSub = this.amountControl.valueChanges.subscribe(() => this.isButtonDisabled = true);
     const amountDebounce = this.amountControl.valueChanges.pipe(
       debounceTime(1000),
       distinctUntilChanged()
     );
-    this.currencyControl.valueChanges.subscribe(() => {
+    const currencyCtrlSub = this.currencyControl.valueChanges.subscribe(() => {
       this.isButtonDisabled = true;
       this.getCurrencies();
     });
-    amountDebounce.subscribe(() => {
+    const debounceSub = amountDebounce.subscribe(() => {
       this.getCurrencies();
     });
+    this.subscriptions.add(amountCtrlSub).add(currencyCtrlSub).add(debounceSub);
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
   }
 
   getCurrencies(): void {
     this.amount = this.amountControl.value;
     this.currency = this.currencyControl.value;
     if (this.amount && this.currency) {
-      this.service.getExchangeRates(this.currency).subscribe(resp => this.convertAmount(resp.rates.USD));
+      const serviceSub = this.service.getExchangeRates(this.currency).subscribe(resp => this.convertAmount(resp.rates.USD));
+      this.subscriptions.add(serviceSub);
     }
   }
 
-  convertAmount(exchRate): void {
+  convertAmount(exchRate: number): void {
     if (this.amount.includes(',')) {
       const colonInd = this.amount.indexOf(',');
       this.amount = this.setCharAt(this.amount, colonInd, '.');
@@ -65,17 +74,18 @@ export class CurrencyConverterComponent {
           width: 'auto',
           height: 'auto'
         });
-        dialogRef.afterClosed().subscribe(result => {
+        const closeSub = dialogRef.afterClosed().subscribe(result => {
           if (result) {
             this.addElement(element);
           }
         });
-    } else {
-      this.addElement(element);
-    }
+        this.subscriptions.add(closeSub);
+      } else {
+        this.addElement(element);
+      }
   }
 
-  addElement(element): void {
+  addElement(element: SumTableData): void {
     this.showTable = false;
     this.exchangedHistory.push(element);
     setTimeout(() => {
