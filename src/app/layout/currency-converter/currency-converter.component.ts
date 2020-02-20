@@ -54,7 +54,7 @@ export class CurrencyConverterComponent {
     this.isButtonDisabled = false;
   }
 
-  addExchangedToTable() {
+  addExchangedToTable(): void {
     const element: SumTableData = {
       amount: this.amount,
       converted: this.converted,
@@ -75,7 +75,7 @@ export class CurrencyConverterComponent {
     }
   }
 
-  addElement(element) {
+  addElement(element): void {
     this.showTable = false;
     this.exchangedHistory.push(element);
     setTimeout(() => {
@@ -87,7 +87,7 @@ export class CurrencyConverterComponent {
     return str.substr(0, index) + chr + str.substr(index + 1);
   }
 
-  isFieldsChanged() {
+  isFieldsChanged(): boolean {
     if (this.exchangedHistory.length > 0) {
       const lastIndex = this.exchangedHistory.length - 1;
       if (this.exchangedHistory[lastIndex].amount !== this.amountControl.value) {
