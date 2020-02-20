@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { SumTableData } from 'src/app/shared/data';
 
 @Component({
   selector: 'app-sum-table',
@@ -6,9 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SumTableComponent implements OnInit {
 
+  @Input() tableData: SumTableData[];
+
   constructor() { }
 
   ngOnInit() {
+    console.log(this.tableData);
   }
 
 }

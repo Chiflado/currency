@@ -38,4 +38,10 @@
             </div>
         </div>
     </div>
+    <div>
+        <app-sum-table
+            *ngIf="exchangedHistory.length > 0"
+            [tableData]="exchangedHistory">
+        </app-sum-table>
+    </div>
 </mat-card>
