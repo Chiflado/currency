@@ -3,6 +3,8 @@ import { FormControl } from '@angular/forms';
 import { CurrencyConverterService } from 'src/app/shared/domain/currency-converter.service';
 import { SumTableData } from 'src/app/shared/data';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { MatDialog } from '@angular/material';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-currency-converter',
@@ -18,13 +20,18 @@ export class CurrencyConverterComponent {
   amountControl = new FormControl('');
   currencyControl = new FormControl('');
   showTable = false;
+  isButtonDisabled = true;
 
-  constructor(private service: CurrencyConverterService) {
+  constructor(private service: CurrencyConverterService, public dialog: MatDialog) {
+    this.amountControl.valueChanges.subscribe(() => this.isButtonDisabled = true);
     const amountDebounce = this.amountControl.valueChanges.pipe(
       debounceTime(1000),
       distinctUntilChanged()
     );
-    this.currencyControl.valueChanges.subscribe(() => this.getCurrencies());
+    this.currencyControl.valueChanges.subscribe(() => {
+      this.isButtonDisabled = true;
+      this.getCurrencies();
+    });
     amountDebounce.subscribe(() => {
       this.getCurrencies();
     });
@@ -44,15 +51,32 @@ export class CurrencyConverterComponent {
       this.amount = this.setCharAt(this.amount, colonInd, '.');
     }
     this.converted = Number(this.amount) * exchRate;
+    this.isButtonDisabled = false;
   }
 
   addExchangedToTable() {
-    this.showTable = false;
     const element: SumTableData = {
       amount: this.amount,
       converted: this.converted,
       currency: this.currency
     };
+    if (!this.isFieldsChanged()) {
+        const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+          width: 'auto',
+          height: 'auto'
+        });
+        dialogRef.afterClosed().subscribe(result => {
+          if (result) {
+            this.addElement(element);
+          }
+        });
+    } else {
+      this.addElement(element);
+    }
+  }
+
+  addElement(element) {
+    this.showTable = false;
     this.exchangedHistory.push(element);
     setTimeout(() => {
       this.showTable = true;
@@ -64,13 +88,17 @@ export class CurrencyConverterComponent {
   }
 
   isFieldsChanged() {
-    if (this.amount !== this.amountControl.value) {
-      return true;
+    if (this.exchangedHistory.length > 0) {
+      const lastIndex = this.exchangedHistory.length - 1;
+      if (this.exchangedHistory[lastIndex].amount !== this.amountControl.value) {
+        return true;
+      }
+      if (this.exchangedHistory[lastIndex].currency !== this.currencyControl.value) {
+        return true;
+      }
+      return false;
     }
-    if (this.currency !== this.currencyControl.value) {
-      return true;
-    }
-    return false;
+    return true;
   }
 
 }
