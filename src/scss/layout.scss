@@ -1,0 +1,39 @@
+@import "_variables.scss";
+
+#layout-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+#top-navbar {
+    width: 100%;
+    height: 80px;
+    background: $primary;
+}
+
+#content-wrapper {
+    display: flex;    
+    width: 100%;
+    height: calc(100% - 80px);
+    overflow: hidden;
+}
+
+#sidebar {
+    width: 250px;
+    // position: fixed;
+    background: $secondary;
+    height: 100%;
+    overflow-y: auto;
+
+}
+
+#content-card {
+    background: whitesmoke;
+    width: 100%;
+    padding: 20px;
+}
+
+#currency-card {
+    height: calc(100% - 20px);
+}
