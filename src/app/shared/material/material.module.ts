@@ -5,7 +5,8 @@ import {
   MatSelectModule,
   MatInputModule,
   MatButtonModule,
-  MatTableModule
+  MatTableModule,
+  MatDialogModule
 } from '@angular/material';
 import { CommonModule } from '@angular/common';
 
@@ -19,7 +20,8 @@ import { CommonModule } from '@angular/common';
     MatSelectModule,
     MatInputModule,
     MatButtonModule,
-    MatTableModule
+    MatTableModule,
+    MatDialogModule
   ],
   exports: [
     MatCardModule,
@@ -27,7 +29,8 @@ import { CommonModule } from '@angular/common';
     MatSelectModule,
     MatInputModule,
     MatButtonModule,
-    MatTableModule
+    MatTableModule,
+    MatDialogModule
   ]
 })
 export class MaterialModule { }

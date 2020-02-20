@@ -12,6 +12,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { OnlyNumberDirective } from './shared/only-number.directive';
 import { HttpClientModule } from '@angular/common/http';
 import { SumTableComponent } from './layout/currency-converter/sum-table/sum-table.component';
+import { ConfirmDialogComponent } from './layout/currency-converter/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { SumTableComponent } from './layout/currency-converter/sum-table/sum-tab
     SidebarComponent,
     CurrencyConverterComponent,
     OnlyNumberDirective,
-    SumTableComponent
+    SumTableComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -31,6 +33,7 @@ import { SumTableComponent } from './layout/currency-converter/sum-table/sum-tab
     ReactiveFormsModule,
     HttpClientModule
   ],
+  entryComponents : [ConfirmDialogComponent],
   providers: [],
   bootstrap: [AppComponent]
 })
