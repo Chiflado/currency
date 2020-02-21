@@ -9,14 +9,14 @@ export class SumTableComponent {
 
   @Input() tableData: SumTableData[];
 
-  displayedColumns: string[] = ['amount', 'currency', 'converted'];
+  readonly displayedColumns: string[] = ['amount', 'currency', 'converted'];
 
   getTotalCost(): number {
     const total = this.tableData.map(t => t.converted).reduce((acc, value) => acc + value, 0);
     return this.roundConverted(total);
   }
 
-  roundConverted(value): number {
+  roundConverted(value: number): number {
     return Math.round((value + Number.EPSILON) * 100) / 100;
   }
 

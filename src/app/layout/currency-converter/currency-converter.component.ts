@@ -17,6 +17,7 @@ export class CurrencyConverterComponent implements OnDestroy {
   amount: string;
   currency: string;
   exchangedHistory: SumTableData[] = [];
+  exchDate: string;
 
   amountControl = new FormControl('');
   currencyControl = new FormControl('');
@@ -49,7 +50,10 @@ export class CurrencyConverterComponent implements OnDestroy {
     this.amount = this.amountControl.value;
     this.currency = this.currencyControl.value;
     if (this.amount && this.currency) {
-      const serviceSub = this.service.getExchangeRates(this.currency).subscribe(resp => this.convertAmount(resp.rates.USD));
+      const serviceSub = this.service.getExchangeRates(this.currency).subscribe(resp => {
+        this.exchDate = resp.date;
+        this.convertAmount(resp.rates.USD);
+      });
       this.subscriptions.add(serviceSub);
     }
   }
